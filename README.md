@@ -11,7 +11,7 @@ newer S series provides an IQ baseband interface.
 It appears to be using an integrated ARM M7 built into the HR-C3000.
 
 The programming cable is actually a common USB to TTL serial interface (**not** an actual USB device).
-It's still not impossible the radio could appear as a DFU usb device for uprgades however.
+It's still not impossible the radio could appear as a DFU usb device for upgrades however.
 
 ## Boot Modes
 
