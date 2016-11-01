@@ -8,7 +8,7 @@ The radio uses a vastly different design than the familiar MD380/MD390. It uses 
 It is a familiar chip used in many Wouxun/Baofeng model, however to the key difference that this
 newer S series provides an IQ baseband interface.
 
-It appears to be using an integrated ARM M7 built into the HR-C3000.
+It appears to be using an integrated ARM M7 built into the HR-C3000?
 
 The programming cable is actually a common USB to TTL serial interface (**not** an actual USB device).
 It's still not impossible the radio could appear as a DFU usb device for upgrades however.
@@ -19,7 +19,7 @@ There is an unused ribbon connector on the front side of the mainboard.
 
 The connector used is called _M328+_ (as used on the Motorola GP388 and others), sometimes also called M7. It is 40mm in length.
 The audio pinout appears to be identical to other radios using this connector. Two more pins are used for the programming port.
-Four more pins are unknown.
+Four more pins are unknown (but appear to be unrouted passed the ribbon on the front panel board).
 
 ## Time Slots
 
