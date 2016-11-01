@@ -36,4 +36,4 @@ Different boot modes seem to be available:
 |:---:|:---------------:|:------------------:|:----------------:| -------- |
 | *X* |                 | *X* |    | [Flip + Mirror screen](https://github.com/xSmurf/md398-re/blob/master/teardown/Display_InvertedMirrored.jpg) | 
 |     | *X*             | *X* |    | ??? Black screen no chime, upgrade mode? |
-|     |                 | *X* | *X* | GPS Test mode |
+|     |                 | *X* | *X* | [GPS Test mode](https://github.com/xSmurf/md398-re/blob/master/teardown/GPS_TestMode.jpg) |
