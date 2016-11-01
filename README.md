@@ -21,6 +21,12 @@ The connector used is called _M328+_ (as used on the Motorola GP388 and others),
 The audio pinout appears to be identical to other radios using this connector. Two more pins are used for the programming port.
 Four more pins are unknown.
 
+## Time Slots
+
+The radio CPS and firmware appear to only allow selecting Time Slot 1. It is possible to modify some xml to enable the CPS to program Time Slot 2.
+Doing that however, does not appear to change the behavior of the radio. The radio appears to transmit on both TDMA timeslots with duplicate packets, 
+as a Tier I radio would (ie: ETSI 102 361-1 continuous transmission mode).
+
 ## Boot Modes
 
 Different boot modes seem to be available:
