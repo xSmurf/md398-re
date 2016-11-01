@@ -5,7 +5,7 @@ Resources for the Tytera (TYT) MD398 (aka Radioddity GD-55).
 ## General Information
 
 The radio uses a vastly different design than the familiar MD380/MD390. It uses the [AT1846S radio SoC](http://www.auctus.cn/enindex/ptshow.html?id=2).
-It is a familiar chip used in many Wouxun/Baofeng model, however to the key difference that this
+It is a familiar chip used in many Wouxun/Baofeng model (?), however to the key difference that this
 newer S series provides an IQ baseband interface.
 
 It appears to be using an integrated ARM M7 built into the HR-C3000?
