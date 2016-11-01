@@ -4,7 +4,7 @@ Resources for the Tytera (TYT) MD398 (aka Radioddity GD-55).
 
 ## General Information
 
-The programming cable is actually a common USB to TTL serial interface (**not** an actual USBN device).
+The programming cable is actually a common USB to TTL serial interface (**not** an actual USB device).
 It's still not impossible the radio could appear as a DFU usb device for uprgades however.
 
 ## Boot Modes
