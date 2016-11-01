@@ -34,6 +34,6 @@ Different boot modes seem to be available:
 
 | PTT | TOP SIDE BUTTON | BOTTOM SIDE BUTTON | EMERGENCY BUTTON | Function |
 |:---:|:---------------:|:------------------:|:----------------:| -------- |
-| *X* |                 | *X* |    | Flip + Mirror screen | 
+| *X* |                 | *X* |    | [Flip + Mirror screen](https://github.com/xSmurf/md398-re/blob/master/teardown/Display_InvertedMirrored.jpg) | 
 |     | *X*             | *X* |    | ??? Black screen no chime, upgrade mode? |
 |     |                 | *X* | *X* | GPS Test mode |
