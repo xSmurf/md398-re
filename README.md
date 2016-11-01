@@ -15,6 +15,12 @@ It's still not impossible the radio could appear as a DFU usb device for upgrade
 
 There is an unused ribbon connector on the front side of the mainboard.
 
+## Connector
+
+The connector used is called _M328+_ (as used on the Motorola GP388 and others), sometimes also called M7. It is 40mm in length.
+The audio pinout appears to be identical to other radios using this connector. Two more pins are used for the programming port.
+Four more pins are unknown.
+
 ## Boot Modes
 
 Different boot modes seem to be available:
