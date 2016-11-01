@@ -1,0 +1,388 @@
+Project name: E-DMR digital radio chip
+File number: HR3. 0 0 2. 8 0 0 8.--
+Item number: HR3. 0 0 2 a secret
+Hardware circuit design specification V3
+Document version number 3.0
+Write people: Zhao Hua
+Preparation time: 2009-9-17
+Department: Systems Department
+Review people: Chen, hudong, and
+Review time: 
+Hardware circuit design Description The Secret
+Hangzhou macro Rui Communication Technology Co., Ltd.
+Revision history（Revision History
+
+Number revision description Revision date revised version number revision people approved people
+1 build the hardware circuit design specification 2009-9-17 1.0 Zhao, Hua Chen, hudong
+2 modify the audio design, The increase in FM 2009-12-3 2.0 Zhao Hua
+3 modify the AD/DA and power supply design, the removal of the FM,
+Modify the Document Format 2010-3-15 3.0 Zhao Hua
+
+Hardware circuit design Description The Secret
+Hangzhou macro Rui Communication Technology Co., Ltd.
+Directory
+1. Introduction....................................................................................................................... ............................. 1
+1.1. Purpose of the preparation of....................................................................................................................... ............. 1
+1.2. Product background....................................................................................................................... ............. 1
+1.3. Definition....................................................................................................................... ..................... 1
+1.4. References....................................................................................................................... ............. 1
+2. Hardware System Overview....................................................................................................................... ............. 3
+2.1. Functional requirements....................................................................................................................... ............. 3
+2.2. The overall programme....................................................................................................................... ............. 3
+2.3. System interface....................................................................................................................... ............. 4
+3. The hardware system detailed design....................................................................................................................... ..... 6
+3.1. Processing Board detailed design....................................................................................................................... . 6
+3.1.1. Processing Board indicator....................................................................................................................... . 6
+3.1.2. Processor Board functional Block Description........................................................................................................ 6
+3.1.3. Key components...................................................................................................................... 1 1
+3.2. The RF Board detailed design...................................................................................................................... 1 2
+3.2.1. The RF Board indicators：.................................................................................................................. 1 2
+3.2.2. The RF Board module description...................................................................................................... 1 2
+3.2.3. Key components...................................................................................................................... 1 2
+4. Development environment....................................................................................................................... ................... 1 3
+5. Appendix....................................................................................................................... ........................... 1 4
+Hardware circuit design Description The Secret
+
+1 Hangzhou macro Rui Communication Technology Co., Ltd.
+1. Introduction
+1.1. Purpose of the preparation of
+This document is the E-DMR Development Board V3. 0 hardware design description document, which describes in detail the entire hardware module design principle, which
+The main purpose is for E-DMR Development Board schematic design provide the basis, and as PCB design, software driver design and the upper application software
+Member of the design reference and Design Guide.
+
+1.2. Product background
+Wireless walkie-talkie due to having instant communication, economical and practical, low cost, easy to use and without communication costs, etc., so wide
+Pan applied in civilian, emergency treatment and other aspects. Especially in the emergency and no cell phone Network Coverage, radio and more
+Plus shows its irreplaceable status. Today, Analog Radio still occupy most of the market, but because of digital communication can
+To provide richer types of business, better service quality, security features and connectivity, as well as higher spectral efficiency, and therefore the digital intercom
+Machine research, production and use is advancing with the times, in line with information technology, digital development is an inevitable trend.
+DMR Digital Mobile Radio, digital mobile radio Protocol is the European telecommunications Standards Institute(ETSI)in 2 0 0 4 in the proposed
+A new digital trunking communication Protocol, and has good development prospects.
+The present system is based on the DMR Protocol development boards, mainly to meet the HR3. 0 0 2 project group of the chip code verification, at the same time also can achieve
+Now the development Board digital talkback and text messaging, and other functions.
+
+1.3. Definition
+HR: HongRui（macro core）
+DMR: Digital Mobile Radio digital mobile radio）
+ARM: Advanced RISC Machine, advanced RISC machines
+FPGA: Field Programmable Gate Array（element of the programmable logic gate array
+
+
+1.4. References
+Datasheet: XC3SD3400A FPGA
+Datasheet: LPC2368 ARM
+Datasheet: AD9218 ADC
+Datasheet: the ad9763 DAC
+Datasheet: CMX638 vocoder
+Datasheet: AMBE3000 vocoder
+Datasheet: XCF16P Xilinx configuration chip
+Datasheet: TPS54286 switching power supply
+Datasheet: TPS73618 linear power supply
+Datasheet: REG113NA-5 linear power supply
+Datasheet: CP2102 USB-to-serial
+Datasheet: LEA-5S GPS module
+Datasheet: DS18B20 temperature sensor
+Datasheet: the adxl323 acceleration sensor
+Datasheet: LM128128CBY LCD
+Datasheet: ALC5621 Codec
+Datasheet: 25LC512 EEPROM
+Datasheet: the ds3904 has the number of transfer resistance
+Datasheet: GT21L16S2Y standard dot matrix Chinese character library chip
+
+2. Hardware System Overview
+2.1. Functional requirements
+¾ The chip test functions
+Provide chip-MS based on the functions of the FPGA resources, provides LED indication, test button, hardware, test IO and dial the code switch,
+Provide configuration of the chip, providing the software to test the IO, provide the parameters and the data channel.
+
+¾ Voice channel function
+Provide CMX638 and AMBE3000 two sets of independent language encoding and decoding scheme, to provide the MIC, Line IN, headphones, speaker channel
+And interface, provide the alert tone interface.
+
+¾ Human-machine interaction function
+Provide 2 4 keys of the standard keyboard, provided 1 2 8×1 2 8 dot matrix STN screen, volume, channel select buttons, provides GB2312
+Standard word library.
+
+¾ Storage function
+Provide 512kbit E2
+The PROM storage space for the machine information storage.
+
+¾ Information acquisition function
+Provide electricity information provides a signal strength indication, providing the Board acceleration indication, to provide the machine working temperature indication, provide the RTC when
+Minutes.
+
+¾ Power management functions
+Using a 7.2 V power supply, rational distribution of the generated 5V, 3.3 V, 1.8 V, 1.2 V Voltage.
+
+¾ Of the RF channel features
+The RF channel meets RF requirements, in line with the TDMA working conditions, consistent with the chip of the radio frequency variety of Docking mode.
+
+¾ Auxiliary function
+Providing a vibrating alert, a GPS interface, provide a USB-to-serial interface provides the PC dedicated setup software.
+
+2.2. The overall programme
+The hardware platform is for HR_C5000 chip provides a development platform, but also for the future of the digital walkie-talkie machine solutions to make a technical
+Bedding. The programme design, using FPGA+AD/DA+voice Codec configuration HR_C5000 of the prototype, the peripheral is equipped with a circuit to
+Speaking machine manufacturers more often use the programme as a reference, in order to ensure the HR_C5000 through the MPW formed the sample sheet, the ability to direct the use of the present
+Development platform of the solution implementation to the user of the final solution.
+DMR Development Board of the overall hardware system architecture according to the functions are divided into the following sections: power supply module, signal processing module, an audio
+Codec module, voice Codec module, man-machine interface and sensor, RF module and GPS module. Wherein the signal processing module using
+FPGA implementation of modulation and demodulation; Audio Codec module using CMX638 and AMBE3000 two programmes; a voice Codec using
+ALC5621; the man-machine interface using ARM7 management, processing button, knob, data storage and interface display; a sensor group identification
+Don't voltage, temperature, acceleration, signal strength and other parameters. The overall hardware architecture is shown in Figure 2.1 below:
+
+Figure 2.1: overall hardware architecture
+
+2.3. System interface
+The external system interface is shown in Table 2-1: the
+Table 2-1: system interface
+Interface Project Description The schematic diagram of bit number of the interface in the form of
+Audio socket Audio Line IN input J501 with a normally open switch and 3.5 mm audio Jack
+Audio Jack headphone output J502 with a normally open switch and 3.5 mm audio Jack
+Horn socket horn output LS501 1X2, the 2.54 mm pitch bend pin
+Test the ground pins P102,P103,P104 1X2, the 2.54 mm pitch pin
+Vibration motor a vibration motor interface P205 1.27 mm pitch, two needle bent connecting seat
+Mini USB connection to PC Mini USB interface P206 Mini USB
+ARM JTAG ARM JTAG port P201 2X10, the 2.54 mm pitch pin
+FPGA JTAG FPGA JTAG port P301 1X6, the 2.54 mm pitch row needle
+FPGA TEST FPGA test interface P302 2X12, and 2.54 mm pitch row needle
+SMA GPS antenna interface S226 SMA straight plug
+RF connection the RF Board interface P204 2X16, the 2.54 mm pitch curved row female
+DC IN 7.2 V power inputs P101 standard adapter female
+
+3. The hardware system detailed design
+3.1. Processing Board detailed design
+3.1.1. Processing Board indicator
+According to the E-DMR project requirements, The processing plate of the indicator requirements shown in Table 3-1 below:
+Table 3-1: handling the Board index
+Single Board power consumption <4W
+Working Temperature: -20~7 0℃
+Storage Temperature -30~8 0℃
+The Board size 100mm×160mm
+Send the signal signal to Noise Ratio 70db
+Signal transmission power of-15dbm
+DA rate of 38.4 KHz(baseband)/4.9152 MHz(medium frequency)
+Signal received power of -51~-15dbm
+AD rate of 38.4 KHz(baseband)/ 4.9152 MHz(medium frequency)
+The FPGA operation Clock of 9.8304 MHz
+The CPU operating Clock 12MHz crystal, 48MHz processing Clock
+Operating system μcOS II
+The operation interface of menu operation
+Key indicator 2 4 standard buttons, require button number>2 million times
+Volume knob with switch potentiometer, Voltage Range 0~3.3 V
+The frequency knob 1 6-bit Gray code encoder switch
+USB interface-standard Mini USB interface, comply with USB2. 0 standard
+Video Display 1 2 8×1 2 8 dot matrix, the refresh rate of>25Hz
+Audio input MIC differential input, MICBIAS=3.3 V
+Line IN input
+Audio output headphone output, P=45mW
+Horn output, P=1W
+Audio compression RACWAL & AMBE+2 standard, the bit rate of 3.6 Kbps
+The voltage monitoring requirements of the four-cell battery indicator, precision index is<0.5 V
+Temperature monitoring accuracy<0.1℃
+Acceleration monitoring range of±3g, 300mV/g, (g=9.8 N/kg)
+
+3.1.2. Processor Board functional Block Description
+3.1.2.1. The signal processing module
+According to the E-DMR project group codes to the resources required, the selection of the Xilinx Spartan-3A 3 4 0 0 DSP, model
+XC3SD3400A, the XC3SD3400A has a 2 3 8 7 2 Slices, and 1 2 6 18k Block RAM, the package is FG676, the
+Up to 4 6 9 to a GPIO.
+Configuration of the chip used was a Xilinx Platform Flash-and XCF16P, and the chip capacity is 16Mbit, supports serial and
+In parallel manner, the present system in which we use the master Serial mode.
+FPGA with ARM between the interface includes a set of the SSP, a group of SPI, a set of serial port and interrupt. Wherein the SSP parameters for
+Configuration and data exchange, the SPI is used for voice transmission, such as the boot tone.
+FPGA with ADC is the interface between the includes two 10-bit data, two Clock signals, a sleep signal, wherein the ADC when
+Clock from FPGA PLL supply.
+The FPGA and the DAC between the interface includes two 10-bit data, the fourth clock signal, a sleep signal, wherein the DAC when
+Clock from FPGA PLL supply.
+The FPGA and the Codec Interface includes a set of I
+2
+S-bus, where I
+2
+S-Bus the master clock from the FPGA PLL supply.
+The FPGA with the vocoder interface comprises two groups, one group with the CMX638 is connected to the other group and AMBE3000 is connected, wherein the
+CMX638 interfaces include C-BUS, SPI and other signals, with AMBE3000 interface including McBSP, SPI and its
+Him some signal, wherein AMBE3000 the clock from the FPGA PLL supply.
+In addition, from the FPGA of the I/O leads to a set of 20bit test pin, 8bit LED lights as well as the 8bit DIP switch.
+
+
+3.1.2.2. Man-machine interface and sensor module
+The Processor uses NXP company of LPC2368 with. It is based on a support real-time emulation and embedded trace of the 16/32-bit ARM7
+Processor with 512kB of embedded high-speed Flash memory and 32kB of static RAM; with 1 6 way 1 0-bit A/D conversion
+Controller; with 1 1 0 bit D/A Converter; a plurality of serial interfaces, including 4 standard UART, 4 high-speed I2C bus
+（400kbit/s, SPI, and has a buffering action and the data length of a variable function of the SSP.
+Processor is the role of the system control and human-machine interface to achieve, is the operating system running platform, operating system choice of embedded
+The system more commonly used μcOS system. Main function: liquid crystal display control, keyboard input acquisition and processing, temperature, power,
+Acceleration, signal strength, signal acquisition and processing, digital libraries and plug-E2
+PROM of the control process, channel and volume control, GPS navigation
+The module of the signal processing, the FPGA implementation of the interface, with PC communication and a RF module control, etc.
+The liquid crystal uses the Topway company LM128128CBY LCD Screen, the LCD screen is a 1 2 8*1 2 8 dot matrix, yellow-green bottom black word
+With backlight STN LCD screen, dimensions of 35.6 mm×38.5 mm×2mm（width×height×thickness, and point size for
+0.21 mm*0.21 mm, support yellow-green backlight, the backlight Working voltage is 3.3 V, the backlight Working current is 40mA. The LCD screen using the multi
+Kinds of data interface, the system uses 3-wire SPI interface mode. Since the LCD screen itself, without Chinese character library, so the system plug-in
+A set of General company criteria dot matrix Chinese character library chip GT21L16S2Y, using the SPI port with the CPU is connected. The chip is a paragraph containing 11X12
+Dot and 15X16 dot matrix Chinese character library chip, support GB2312 GB Simplified Chinese characters containing the National beacon Commission legal authorization, ASCII
+Characters and GB2312 and Unicode conversion table. The word library within the chip containing GT fast Pinyin input method codebook, with the set through the company.
+Input method program, and achieve the numeric keypad IT products of the Chinese characters shortcut input.
+Keyboard using the ordinary 3×8 key array, a total of 2 4 button, wherein the PTT and other three on the side of the key using the side keys. Key
+Disk input acquisition mode for the interrupt and scan, 3-column interrupt, 8 lines GPIO.
+Parameter Storage the main use of plug-in E2-PROM, E2-PROM using a Micro Chip company of the 25LC512, the capacity is 512kbit, and
+
+With the ARM interface is SPI.
+Channel knob using the 1 6-bit Gray code encoder switches, each bit corresponds to a channel, the volume knob is used with switch potentiometer,
+The switch used for the Board power supply switch, a potentiometer to 3.3 V partial pressure, by ARM that comes with the ADC after sampling, the voltage value of the drink
+The volume is written to the Codec volume control register.
+The present system of external interface using a serial manner, in order to reduce the volume and increase the interface of the versatility, use the USB-UART Bridge
+Connected to the circuit, the chip uses Silicon company CP210x, the circuit integration degree is HIGH, the built-in USB2. 0 full-speed function Controller, USB
+Transceiver, crystal oscillator, EEPROM and asynchronous serial data bus（the UART to support modem full function of the signal, without any
+Any external USB Device. Powerful, the use of MLP-2 8 package size of only 5mm×5mm, take up very little space.
+GPS module selection of ublox company LEA-4T GPS module, the module can be soldered directly on the PCB, and the system formation of the entire machine. The
+The module comes with a FLASH, a satellite of the second pulse output, the time accuracy of 15ns, and also has a very good indoor detecting effect.
+Sensor group including temperature, voltage, accelerometer and signal strength sensor. Temperature measurement using the DS18B20 sensor, the accuracy of the
+Is 0.1℃, using 1-wire mode and the ARM is connected. The voltage measurement for monitoring the battery, using the ARM of the ADC for the battery
+The measured voltage, depending on the voltage value of the battery is divided into fourth gear, when the voltage of battery is less than a value of the alarm, prompting the need to charge
+Electricity. The acceleration sensor using the adxl323, with±3g measurement range, accuracy of 300mV/g. The signal intensity sensor for measuring the
+The amount of the RF Board signal strength, using the ARM of the ADC on the RF Board signal strength pins for voltage measurement, according to different voltage values
+Get the signal strength.
+
+3.1.2.3. AD/DA conversion module
+The AD/DA main role is the FPGA modulation and demodulation of the signal sent to the RF Board or RF Board signals received and sent with the FPGA
+For modulation demodulation.
+The AD Converter using the Analog Devices AD9218 it. It is a dual-core, 3.3 V, 1 0-bit ADC integrates two high-performance mining
+The sample-and-hold amplifier and a reference voltage source. It uses a multistage differential pipelined architecture with output error correction logic, at the highest data rate
+Provides 1 0-bit accuracy and guarantee the entire operating temperature range no missing code.
+The DA Converter using the Analog Devices, Inc. the ad9763 is. It is a dual-port, high-speed, Dual-Channel 1 0-bit CMOS DAC, each
+Devices integrate two high quality TxDAC+®cores, a voltage reference and digital interface circuit, using 4 8-pin small LQFP-sealed
+Clothing. It provides excellent AC and DC performance while supporting up to 1 2 5 MSPS Update rate.
+
+3.1.2.4. The vocoder module
+Scheme 1. CMX638: the
+CMX638 is a highly integrated, high performance full duplex voice codec, using a robust advanced Low Complexity waveform interpolation technique, the
+Provide ultra-low bit rate long-distance level of sound quality performance, and has a FEC(forward error correction), SDD(soft decision decoding), DTX(discontinuous transmission detection
+Test), VAD(voice activity detection), CNG(comfortable noise generator), STD and DTMF signal detection function. Therefore, the speech codec
+The controller can be widely used for voice storage and playback, VoIP, digital PMR/LMR, regeneration of digital voice trunks and other fields. CMX638 internal
+The structure includes analog and digital two parts, when the port CSEL input low level, i.e., select the use external voice decoder(Codec), by
+Hardware circuit design Description The Secret
+9 Hangzhou macro Rui Communication Technology Co., Ltd.
+Over the serial interface SSP with external devices to exchange data, the encoder and decoder select the off-chip Codec data channels, ports, EEC and REC
+Outputs respectively enable and reset the chip of the Codec; when CSEL is input to the high level, the CMX638 use the internal CODEC module, the module
+The block includes an input / output channel of the programmable gain amplifier(PGA), a 1 6-bit PCM A / D and D / A Converter, and the passband frequency of
+4 kHz low-pass filter, which can effectively achieve an analog signal converted into a digital signal and converts the digital signal into an analog signal process. Host
+Through the Control Bus C-BUS interface to configure the internal registers, to achieve different functions; port SYNC so that the host and the CMX638 synchronization; language
+The sound compression encoder source signal is compressed into a low bit rate of the data frame, the decoder the data frame is decompressed, to recover the source signal; if the use of FEC
+Function, the switch then selects the forward error correction Encoder and decoder, both of which added to the data compression and decompression process: STD / the DTMF
+Management module to provide a speech signal of the special processing functions, to achieve single-tone or dual-tone detection, to improve the speech compression and decompression quality. In the present system
+Using external Codec program.
+Scheme 2. AMBE3000: the
+AMBE3000 is a high-performance multi-rate speech codec chip, which is the compressed data rate from 2.0 to 9.6 kps range
+Adjustable to accommodate different channel rate; in addition, for different bit error rate of the channel, AMBE3000 voice data/error correction data
+The configuration can also be selected:when the channel error rate is high, may be appropriate to increase the error correction Code of rate(to reduce the voice data rate); when the channel bit error
+The rate is not too high, may be appropriate to increase the voice of data/error correction data in the configuration than to get the best voice results.
+AMBE3000 with the Codec, the MCU has a variety of connections, such as SPI, McBSP, I
+2
+C, Parallel, etc., in the present system Codec
+Way of using the SPI interface, Packet mode using McBSP interface.
+
+3.1.2.5. The voice Codec module
+Since the vocoder is a digital speech signal encoding and decoding, and the sound is an analog signal, and therefore also need to be the voice digitization. The present
+The system uses Codec Digital Voice, Codec use Realtek company ALC5621, the ALC5621 is a paragraph with a plurality of output
+The output port of the high-integrated voice Codec, and integrated 1W Class A/B and Class D audio power amplifier using I
+2
+S interface, ideal for
+To the mobile device.
+
+3.1.2.6. Reset and the clock Processing Unit
+FPGA and ARM by a special key to be reset, the rest of the chip through the FPGA or ARM to be reset. Wherein, FPGA
+Can also through the ARM is reset, in particular the reset mode and the derived relationship shown in Figure 3.1 below:
+According to the E-DMR project needs the FPGA Clock using a 9.8304 MHz, its associated chip Clock all by the FPGA PLL
+Supply, ARM, and CMX638 Clock using 12MHz to. Specific system clock and the derived relationship shown in Figure 3.2 below:
+    
+Figure 3.1: The system reset and the derived relationship
+Figure 3.2: the system clock and the derived relationship
+
+3.1.2.7. Power supply module
+Power protection and switch
+Power protection is mainly from three aspects to consider: over-voltage, over-current and reverse connection.
+Overvoltage protection using TVS tube connected in series, the TVS tube used VISHAY company SMAJ7. 5A TVS tube, it is the nominal voltage of the
+7.5 V, turn-on voltage of 8.33 V To 9.21 V, because the present system with a supply voltage of 7.2 V, the use of lithium battery power supply when there is an electrical
+Pressure fluctuations in the range generally charged when may reach 8V, so the choice of this model is quite suitable.
+The overcurrent protection uses the most conventional fuse way fuse selection since the resumption of fuses, commonly known as million times fuse. The present system is selected
+With a working voltage of 8V, the fusing current 2A fuse. Fuse the main role is not to prevent the Working current is too large, but to prevent a short circuit.
+Anti-reverse connection protection using a reverse diode of the way, the diode model selection 1SR154-4 0 0, also you can choose the parameters close to the two
+The pole tube in. The power supply is connected, the diode is not turned on, the system can work normally, when the power supply reverse polarity, the diode is turned on, the direct current through the two
+The pole tube without passing through the system, play a protective role.
+
+Power switch using a P-MOS to achieve the input power off using the volume switch with switch potentiometer）start up or shut down. Open
+Machine, the MOS tube is turned on, all the chips on the power; shuts down the CPU to control the P-MOS transistor is turned off, when all need to OF DATA announced
+Save it for later, the CPU and then let the MOS tube is shut off, to achieve safe shutdown.
+Level conversion
+The present system of the power supply voltage is 7.2 V, you need to use the voltage of a 1.2 V, 1.8 V, 3.3 V, 5V. Processing Board all the chips in the worst
+Case power demand as shown in Table 3-2 below:
+Table 3-2: minimum worst-case power requirements
+Serial number device name QT. 1.2 V 1.8 V 3.3 5V
+1. XC3SD3400 1 325mA approximately 165ma (static)
+2. LPC2368 1 125mA (static)
+3. AD9218 1 183mA
+4. The ad9763 1 115mA
+5. CMX638 1 60mA 11.3 mA
+6. AMBE3000 1 90mA 42mA
+7. ALC5621 1 35mA+1300mW
+8. 25LC512 1 15mA
+9. GT21L16S2Y 1 12mA
+1 0. The LEA-4T 1 70mA
+1 1. XCF16P 1 10mA 18mA
+1 2. DS18B20 1 1.5 mA
+1 3. The adxl323 1 1.8 uA
+1 4. The ds3904 has 1 3mA
+1 5. LM128128CMY 1 40mA
+1 6. IM811T 1 20mA
+1 7. The vibration motor 1 200mA
+1 8. Crystal 2 24mA
+SUM 1 9 325mA 160mA 1080mA
+Note: the ALC5621 of 1300mW for the built-in audio amplifier maximum power
+According to the previous power consumption analysis, the use of the following types of level conversion chip: TPS54286, the TPS73618 and REG113NA-5 level. It
+In the TPS54286 is a DC-DC, Dual output, maximum output current is 2A, in the present system to set the output for 1.2 V and 3.3 V, 1.2 V
+For FPGA core supply, 3.3 V for full power. TPS73618 and REG113NA-5 of the LDO, the output voltage is 1.8 V
+And 5.0 V, The maximum output current is 400mA, 1.8 V for the FPGA configuration chip and two pieces of the vocoder of the nuclear power supply, 5.0 V for RF
+The plate of the power supply, wherein the TPS73618 the input voltage selection of 3.3 V.
+Power-up sequence requirements
+Due to the AMBE300 the core voltage to 1.8 V and the interface voltage of 3.3 V with power-up sequencing requirements, so the design of the power supply when the 3.3 V in the start
+To be earlier than 1.8 V, otherwise the audio codec may be error-prone.
+
+3.1.3. Key components
+Table 3-3: the key to the device list
+Serial number device name Description Package quantity unit price total price
+1 TPS54286 level conversion TSSOP14 1
+2 TPS73618 level Converter SOT23-5 1 
+3 REG113NA-5 level Converter SOT23-5 1
+4 LPC2368 ARM7 CPU LQFP100 1
+5 25LC512 Serial E2
+PROM SO-8 1
+6 GT21L16S2Y font chip SO-8 1
+7 LM128128CBY LCD Screen 1
+8 CP2102 USB to UART QFN28 1
+9 LEA-4T GPS Module 1
+1 0 DS18B20 temperature sensor To-9 2 1
+1 1 The ds3904 has a digital rheostat UMAX-8 1
+1 2 The adxl323 acceleration sensor CP-1 6 1
+1 3 CMX638 Audio Codec LQFP48 1
+1 4 ALC5621 voice Codec QFN-3 2 1
+1 5 AMBE3000 Audio Codec TQFP-1 2 8 1
+1 6 AD9218 ADC ST-4 8 1
+1 7 THE AD9763 DAC ST-4 8 1
+1 8 XC3SD3400A FPGA FG676 1
+1 9 XCF16P FPGA configuration chip VO48 1
+
+3.2. The RF Board detailed design
+
+3.2.1. The RF Board indicators:
+
+3.2.2. The RF Board module description
+
+3.2.3. Key components
+
+4. Development environment
+TBD 
+
+5. Appendix
+TBD

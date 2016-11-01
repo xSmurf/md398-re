@@ -1,0 +1,102 @@
+Three anti-mobile phone building intercom DMR digital intercom module, programme development
+
+A. Three anti-mobile phone digital intercom DMR module(based on the HR-C3000 intercom DMR module)
+
+DMR mobile phone module is a DMR standard digital intercom module,support single-duplex voice, confirmation/non-confirmation number
+According to the SMS communication. This module has built-in high-performance RF transceiver chip and RF power amplifier, DMR digital intercom chip. External
+The MCU via a standard asynchronous serial communication module set the operating parameters and the control module working condition. The module is just outside
+Connected to the antenna, a microphone, a voice amplifier can be composed of a complete DMR digital walkie-talkie.
+Field of application: small digital walkie-talkie,cell phone digital intercom system
+
+(A). Module characteristics:
+
+1. Frequency range:4 0 0~470MHz
+2. Frequency interval:12.5 kHz
+3. RF output power:High Power 1W,Low Power 0.5 W
+4. Power supply voltage:3.7 V~4.2 V
+5. High Receiving Sensitivity:-117dBm
+6. Supporting the write frequency
+7. Support DMR Protocol and is compatible with traditional analog intercom mode
+8. The DMR mode supports the following operations
+
+1)Supports group call, individual call, all call
+2)support the confirmation, non-confirmation SMS communication, support status of the short message
+3)Support calling/called detection
+4)support of call tips
+5)support remote monitoring
+6)Support emergency Alarm
+7)Support Stun/activate
+8)support voice encryption
+9)Support pass-through, relay mode Voice, SMS app
+
+(II). Analog intercom mode supports the following operations
+1)Support CTCSS/CDCSS sub-audio squelch
+2)support the monitoring
+
+(III). Module size and package
+II. Building intercom digital intercom module(based on the HR-C5000 intercom DMR chip)
+The module is using the DMR standard digital intercom module,support single-duplex/full-duplex voice, confirmation/non-confirmation data to SMS
+Communication. This module has built-in high-performance RF transceiver chip and RF power amplifier, DMR digital intercom chip HR_C5000, high resistance
+Can the vocoder, the master MCU. An external MCU via a standard asynchronous serial communication module set the operating parameters and the control module
+Work of the state. The module requires only an external antenna, a microphone, a voice amplifier can be composed of a complete DMR digital walkie-talkie.
+
+Application area: elevators intercom communication
+
+2 characteristics frequency range:4 0 0~470MHz
+
+Frequency interval:12.5 kHz
+
+RF output power:high power 4W Low Power 1W
+
+Supply Voltage:12V
+
+High Receiving Sensitivity: -120dBm
+
+Support group call, all call, single call and full-duplex voice communication
+Support confirmed, non-confirmed SMS communication, support status of the short message
+Support calling/called detection
+Support of call tips
+Support remote monitor
+Support pass-through, relay mode Voice, SMS app
+
+3 sizes and pin M400 Board as shown in Figure 1, having a size of 50mm×90mm.
+
+III. The digital walkie-talkie module, programme development(based on HR_C5000 chip)
+
+Based on HR_C5000 or HR_C3000 chip,according to the customer the functional requirements of the project Development Programme,to provide
+The digital walkie-talkie PCBA Board or module,support for digital and analog intercom compatible design,support through the MOTO, the sea can
+Up interconnection,the better the reasonable cluster networking applications,reduce cost,and more competitive advantage.
+
+IV. The minimum integrated Analog walkie-talkie module
+The earliest use discrete components to do the walkie-talkie the traditional solution has been far can not meet the manufacturers for the cost and volume
+Requirements;especially in the fast completion of the walkie talkie development.
+To that end,should market demand,the company independent development and design of a single chip walkie-talkie solution. Put all
+Traditional discrete component solutions integrated into a small module. The module is fully integrated, paired speaking machine of all functions,built-in high availability
+Can be a radio frequency transceiver chip, a microprocessor(MCU), a RF power amplifier(PA)and the like. The module volume is small, the degree of integration
+High, stable performance, flexible application,and in line with most of the world walkie talkie standard. Widely used in any
+Mobile handheld products,such as wireless intercom, paging system, smart home, industrial data acquisition and other fields.
+Welcome the incoming letter consultation,we can provide sample to test and perfect technical support,can meet your fast
+To achieve complete product design.
+
+Module specifications:
+1. Operating frequency range:4 0 0—470MHz;
+2. RF output Power:0.5 W/1W;
+3. Transmit frequency modulation gain of a digitally adjustable;
+4. High-resolution,frequency adjustable;
+5. Having a crystal frequency temperature compensation circuit;
+6. The direct frequency synthesizer of the FM mode;
+7.38 CTCSS encoding and decoding;
+8. Based on digital signal processing techniques to the transmitting filter;
+9. Based on digital signal processing of the FM demodulation techniques;1 0. Low phase noise and fast phase lock time:100us;
+
+1 1. High receiver sensitivity:-122dBm;
+1 2. Fully integrated receiver filter;
+1 3. Ultra-low-power sleep mode;
+1 4. Voltage operating range:3.6 V~6.0 V;
+1 5. Via a standard asynchronous serial interface(RS232)set the parameters of the module;
+1 6. Asynchronous serial port AT command control;
+1 7. Module physical size :3 5*19MM;
+1 8. Communication distance:open non-blocking composition can be up to 3--5 km.
+
+Division I engaged in the 1 0 years of the intercom module, programme development,based on customer functional requirements of the Development Programme/module
+/PCBA Board
